@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: url('crown-background.png') no-repeat center center/cover;
+    width: 80%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#captcha-container {
+    margin-bottom: 30px;
+}
+
+#captcha-input {
+    padding: 8px;
+    margin: 10px 0;
+    width: 80%;
+    max-width: 300px;
+}
+
+#verify-captcha {
+    padding: 8px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#verify-captcha:hover {
+    background-color: #218838;
+}
+
+#key-container.hidden {
+    display: none;
+}
+
+#generate-key {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#generate-key:hover {
+    background-color: #0056b3;
+}
+
+#key-box {
+    border: 2px solid white;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #222;
+}
+
+#key-display {
+    font-size: 1.5em;
+    color: #ffcc00;
+}
+
+.error-message {
+    color: red;
+    font-size: 1.2em;
+    margin-top: 20px;
+    text-align: center;
+}
+

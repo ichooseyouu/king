@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Keysystem</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>King Keysystem</h1>
+        <div id="captcha-container">
+            <label for="captcha-input">Please type the word below:</label>
+            <div id="captcha-text">ExampleCaptcha</div>
+            <input type="text" id="captcha-input" placeholder="Enter the word here" />
+            <button id="verify-captcha">Verify</button>
+        </div>
+        
+        <div id="key-container" class="hidden">
+            <button id="generate-key">Generate Key</button>
+            <div id="key-box">
+                <p id="key-display"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
