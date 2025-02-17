@@ -1,90 +1,57 @@
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+    overflow: hidden;
+    background: black;
+    color: white;
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    text-align: center;
 }
 
 .container {
-    background: url('crown-background.png') no-repeat center center/cover;
-    width: 80%;
-    max-width: 600px;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-#captcha-container {
-    margin-bottom: 30px;
-}
-
-#captcha-input {
-    padding: 8px;
-    margin: 10px 0;
-    width: 80%;
-    max-width: 300px;
-}
-
-#verify-captcha {
-    padding: 8px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#verify-captcha:hover {
-    background-color: #218838;
-}
-
-#key-container.hidden {
-    display: none;
-}
-
-#generate-key {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#generate-key:hover {
-    background-color: #0056b3;
-}
-
-#key-box {
-    border: 2px solid white;
-    margin-top: 20px;
+.executor-box {
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px;
-    background-color: #222;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-#key-display {
-    font-size: 1.5em;
-    color: #ffcc00;
+.executor-image {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
 }
 
-.error-message {
-    color: red;
-    font-size: 1.2em;
-    margin-top: 20px;
-    text-align: center;
+#download-btn {
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
+#download-btn:hover {
+    background: #cc0000;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
