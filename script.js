@@ -1,68 +1,59 @@
-const keys = [
-    "G2788EQ9X7BD", "N10LNWBV4XDU", "EI7PCRUOTLWE", "CVMAQQUG61HC", "CE9NN4CUW73B",
-    "81QPC5MZWDT4", "4F4YLV9QVRHE", "HU4IQ2ENA32R", "INHUIA8RHORA", "AFOVGFZXFX00",
-    "XZHGJZDKW6NN", "O7Y9HKV30RRF", "P5SID8PQC5FN", "ZACSRA1DB36J", "TEDUFJGNYLYJ",
-    "UMO34NFWMYEK", "QYI94QJF1ZZG", "9WF2FWWMF3JJ", "AMMF68ENG2O9", "LOKCCA6UMTLQ",
-    "Q1W3ZNKRSM29", "KGFU8LMN5VZK", "UN6U26CVE4DI", "OYKTXB3MQGUF", "362KIMU6NU6P",
-    // Add all other keys here
-];
+// Snow Effect
+const canvas = document.getElementById("snowCanvas");
+const ctx = canvas.getContext("2d");
 
-const generateKeyButton = document.getElementById("generate-key");
-const keyDisplay = document.getElementById("key-display");
-const captchaInput = document.getElementById("captcha-input");
-const verifyCaptchaButton = document.getElementById("verify-captcha");
-const captchaText = document.getElementById("captcha-text");
-const keyContainer = document.getElementById("key-container");
-const captchaContainer = document.getElementById("captcha-container");
-const errorDisplay = document.createElement("div");
-errorDisplay.classList.add("error-message");
-errorDisplay.style.display = "none"; // Initially hidden
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-let captchaVerified = false;
+const snowflakes = [];
 
-// Check if the key has been generated before (even after refresh)
-if (localStorage.getItem("keyGenerated") === "true") {
-    keyContainer.classList.remove("hidden");
-    generateKeyButton.disabled = true;
-    generateKeyButton.style.backgroundColor = "#6c757d"; // Disabled button
-    errorDisplay.textContent = "You have already generated a key. Please reload the page to try again.";
-    errorDisplay.style.display = "block"; // Show the error
-    keyContainer.parentElement.appendChild(errorDisplay);
-}
-
-// Function to generate random key from the list
-function generateKey() {
-    if (localStorage.getItem("keyGenerated") === "true") {
-        // If the key has already been generated, show an error
-        errorDisplay.textContent = "You have already generated a key. Please reload the page to try again.";
-        errorDisplay.style.display = "block"; // Show the error
-        return;
+class Snowflake {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 4 + 1;
+        this.speedY = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
     }
 
-    const randomIndex = Math.floor(Math.random() * keys.length);
-    keyDisplay.textContent = keys[randomIndex];
+    update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        
+        if (this.y > canvas.height) {
+            this.y = -this.radius;
+            this.x = Math.random() * canvas.width;
+        }
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+    }
+}
+
+function createSnowflakes() {
+    for (let i = 0; i < 100; i++) {
+        snowflakes.push(new Snowflake());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Mark the key as generated in localStorage
-    localStorage.setItem("keyGenerated", "true");
+    snowflakes.forEach(flake => {
+        flake.update();
+        flake.draw();
+    });
 
-    // Disable the button to prevent further clicks
-    generateKeyButton.disabled = true;
-    generateKeyButton.style.backgroundColor = "#6c757d"; // Change the button color to indicate it's disabled
+    requestAnimationFrame(animate);
 }
 
-// Bot verification
-verifyCaptchaButton.addEventListener("click", () => {
-    const userInput = captchaInput.value.trim();
-    if (userInput.toLowerCase() === captchaText.textContent.toLowerCase()) {
-        captchaVerified = true;
-        captchaContainer.style.display = "none";
-        keyContainer.classList.remove("hidden");
-        // Insert the error display below the key container
-        keyContainer.parentElement.appendChild(errorDisplay);
-    } else {
-        alert("Captcha verification failed. Please try again.");
-    }
-});
+createSnowflakes();
+animate();
 
-// Generate key on button click
-generateKeyButton.addEventListener("click", generateKey);
+// Auto-play background music
+const audio = document.querySelector("audio");
+audio.volume = 0.5;  // Adjust volume
